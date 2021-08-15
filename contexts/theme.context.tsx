@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {
   ThemeOptions as MuiThemeOptions,
   ThemeProvider as MuiThemeProvider,
-  createMuiTheme
+  createTheme
 } from '@material-ui/core/styles'
 import { CssBaseline } from '@material-ui/core'
-import { ThemeValues } from '@/utils/types'
 import {
   typography,
   paletteColorsDark,
@@ -13,9 +12,16 @@ import {
 } from '@/styles/theme'
 
 export type ThemeContextValues = {
-  theme: ThemeValues
+  isDarkMode: boolean
   actions: {
-    setTheme: (theme: ThemeValues) => void
+    setIsDarkMode: (action: boolean) => void
+  }
+}
+
+export const themeDefault: ThemeContextValues = {
+  isDarkMode: false,
+  actions: {
+    setIsDarkMode: () => null
   }
 }
 
@@ -23,15 +29,14 @@ export type ThemeProviderTypes = {
   children: React.ReactNode
 }
 
-export const ThemeContext = React.createContext<ThemeContextValues | undefined>(
-  undefined
-)
+export const ThemeContext =
+  React.createContext<ThemeContextValues>(themeDefault)
 
 export const ThemeProvider = ({ children }: ThemeProviderTypes) => {
-  const [theme, setTheme] = useState<ThemeValues>('light')
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(true)
 
   const actions = {
-    setTheme: (theme: ThemeValues) => setTheme(theme)
+    setIsDarkMode: (action: boolean) => setIsDarkMode(action)
   }
 
   const options = (dark: boolean): MuiThemeOptions => {
@@ -39,7 +44,7 @@ export const ThemeProvider = ({ children }: ThemeProviderTypes) => {
 
     return {
       palette: {
-        type: theme,
+        type: isDarkMode ? 'dark' : 'light',
         primary: {
           main: paletteColors.primary
         }
@@ -47,17 +52,23 @@ export const ThemeProvider = ({ children }: ThemeProviderTypes) => {
     }
   }
 
-  const themeValues = createMuiTheme({
+  const themeValues = createTheme({
     typography,
-    ...options(theme === 'dark')
+    ...options(isDarkMode)
   })
 
   return (
-    <ThemeContext.Provider value={{ theme, actions }}>
+    <ThemeContext.Provider value={{ isDarkMode, actions }}>
       <MuiThemeProvider theme={themeValues}>
         <CssBaseline />
         {children}
       </MuiThemeProvider>
     </ThemeContext.Provider>
   )
+}
+
+export const useThemeState = (): ThemeContextValues => {
+  const context = useContext(ThemeContext)
+
+  return context
 }
