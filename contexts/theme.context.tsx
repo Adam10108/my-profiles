@@ -1,28 +1,60 @@
 import React, { useState } from 'react'
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
+import {
+  ThemeOptions as MuiThemeOptions,
+  ThemeProvider as MuiThemeProvider,
+  createMuiTheme
+} from '@material-ui/core/styles'
 import { CssBaseline } from '@material-ui/core'
-import theme from '@/styles/theme'
+import { ThemeValues } from '@/utils/types'
+import {
+  typography,
+  paletteColorsDark,
+  paletteColorsLight
+} from '@/styles/theme'
 
 export type ThemeContextValues = {
-  currentTheme: 'dark' | 'light' | string
+  theme: ThemeValues
+  actions: {
+    setTheme: (theme: ThemeValues) => void
+  }
 }
 
 export type ThemeProviderTypes = {
   children: React.ReactNode
 }
 
-export const themeDefault: ThemeContextValues = {
-  currentTheme: 'light'
-}
-
-export const ThemeContext = React.createContext(themeDefault)
+export const ThemeContext = React.createContext<ThemeContextValues | undefined>(
+  undefined
+)
 
 export const ThemeProvider = ({ children }: ThemeProviderTypes) => {
-  const [currentTheme] = useState('light')
+  const [theme, setTheme] = useState<ThemeValues>('light')
+
+  const actions = {
+    setTheme: (theme: ThemeValues) => setTheme(theme)
+  }
+
+  const options = (dark: boolean): MuiThemeOptions => {
+    const paletteColors = dark ? paletteColorsDark : paletteColorsLight
+
+    return {
+      palette: {
+        type: theme,
+        primary: {
+          main: paletteColors.primary
+        }
+      }
+    }
+  }
+
+  const themeValues = createMuiTheme({
+    typography,
+    ...options(theme === 'dark')
+  })
 
   return (
-    <ThemeContext.Provider value={{ currentTheme }}>
-      <MuiThemeProvider theme={theme}>
+    <ThemeContext.Provider value={{ theme, actions }}>
+      <MuiThemeProvider theme={themeValues}>
         <CssBaseline />
         {children}
       </MuiThemeProvider>

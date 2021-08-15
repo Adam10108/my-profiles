@@ -1,4 +1,3 @@
-import { createMuiTheme } from '@material-ui/core/styles'
 import createBreakpoints from '@material-ui/core/styles/createBreakpoints'
 
 const breakpoints = createBreakpoints({})
@@ -42,6 +41,18 @@ export const typography = {
   }
 }
 
-export default createMuiTheme({
-  typography
-})
+export const paletteColorsDark = {
+  primary: '#0f4c75',
+  secondary: '#3282b8',
+  error: '#E44C65',
+  background: '#1b262c',
+  text: '#bbe1fa'
+}
+
+export const paletteColorsLight = {
+  primary: '#6886c5',
+  secondary: '#ffe0ac',
+  error: '#E44C65',
+  background: '#f9f9f9',
+  text: '#050505'
+}

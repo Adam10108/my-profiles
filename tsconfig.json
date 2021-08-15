@@ -17,6 +17,7 @@
     "paths": {
       "@/components/*": ["components/*"],
       "@/contexts/*": ["contexts/*"],
+      "@/utils/*": ["utils/*"],
       "@/styles/*": ["styles/*"]
     }
   },
