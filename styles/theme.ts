@@ -1,4 +1,5 @@
 import createBreakpoints from '@material-ui/core/styles/createBreakpoints'
+import { createTheme } from '@material-ui/core/styles'
 
 const breakpoints = createBreakpoints({})
 
@@ -56,3 +57,5 @@ export const paletteColorsLight = {
   background: '#f9f9f9',
   text: '#050505'
 }
+
+export default createTheme({ typography })
