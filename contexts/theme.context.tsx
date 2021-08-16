@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import {
   ThemeOptions as MuiThemeOptions,
   ThemeProvider as MuiThemeProvider,
@@ -34,6 +34,13 @@ export const ThemeContext =
 
 export const ThemeProvider = ({ children }: ThemeProviderTypes) => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false)
+
+  useEffect(() => {
+    const jssStyles = document.querySelector('#jss-server-side')
+    if (jssStyles && jssStyles.parentElement) {
+      jssStyles.parentElement.removeChild(jssStyles)
+    }
+  }, [])
 
   const actions = {
     setIsDarkMode: (action: boolean) => setIsDarkMode(action)
