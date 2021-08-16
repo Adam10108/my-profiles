@@ -1,20 +1,12 @@
-import { Box, Button, Typography } from '@material-ui/core'
-import { useThemeState, ThemeContextValues } from '@/contexts/theme.context'
+import { Typography } from '@material-ui/core'
+
+import { MyProfileLayout } from '@/components/layouts'
 
 const MyProfile = () => {
-  const { isDarkMode, actions }: ThemeContextValues = useThemeState()
-
   return (
-    <Box display="flex" alignItems="center" justifyContent="center">
+    <MyProfileLayout>
       <Typography variant="h1">My Profile Page</Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => actions.setIsDarkMode(!isDarkMode)}
-      >
-        {isDarkMode ? 'Light' : 'Dark'}
-      </Button>
-    </Box>
+    </MyProfileLayout>
   )
 }
 
