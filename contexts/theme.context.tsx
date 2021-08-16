@@ -33,7 +33,7 @@ export const ThemeContext =
   React.createContext<ThemeContextValues>(themeDefault)
 
 export const ThemeProvider = ({ children }: ThemeProviderTypes) => {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(true)
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false)
 
   const actions = {
     setIsDarkMode: (action: boolean) => setIsDarkMode(action)
