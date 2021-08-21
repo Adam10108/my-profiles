@@ -19,3 +19,4 @@ __snapshots__
 coverage
 playground.tsx
 analytics*
+_document.jsx
