@@ -51,7 +51,7 @@ export const ProfileCover = ({ imgSrc }: ProfileCoverTypes) => {
         <Box className={classes.content}>
           <Box className={classes.textBox}>
             <Typography variant="h2">Hello, Welcome to</Typography>
-            <Typography variant="h1" color="primary">
+            <Typography variant="h1">
               <strong>PROFILE LABS</strong>
             </Typography>
           </Box>
@@ -59,7 +59,7 @@ export const ProfileCover = ({ imgSrc }: ProfileCoverTypes) => {
       </Grid>
 
       <Grid item xs={12} sm={5}>
-        <img src={imgSrc} />
+        <img src={imgSrc} alt="Profile image" />
       </Grid>
 
       <Grid item xs={12} sm={1}>

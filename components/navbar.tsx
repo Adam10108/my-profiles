@@ -1,10 +1,10 @@
 import React from 'react'
 import DarkModeToggle from 'react-dark-mode-toggle'
-import { Box } from '@material-ui/core'
+import { Box, Theme } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useThemeState, ThemeContextValues } from '@/contexts/theme.context'
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     paddingTop: 16,
     paddingBottom: 16,
@@ -14,6 +14,11 @@ const useStyles = makeStyles(() => ({
   },
   logo: {
     width: 120,
+
+    [theme.breakpoints.down('xs')]: {
+      width: 80
+    },
+
     '& img': {
       maxWidth: '100%'
     }
@@ -27,7 +32,7 @@ export const AppBar = () => {
   return (
     <div className={classes.root}>
       <Box className={classes.logo}>
-        <img src="/images/profiles-labs-logo.png" alt="Profiles labs logo" />
+        <img src="/images/logo.png" alt="Profiles labs logo" />
       </Box>
 
       <DarkModeToggle
