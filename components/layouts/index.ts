@@ -1,1 +1,1 @@
-export { MyProfileLayout } from './my-profile-layout'
+export { ProfileContainer } from './profile-container'

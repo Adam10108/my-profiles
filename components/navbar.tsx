@@ -1,15 +1,22 @@
 import React from 'react'
 import DarkModeToggle from 'react-dark-mode-toggle'
-import { Typography } from '@material-ui/core'
+import { Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useThemeState, ThemeContextValues } from '@/contexts/theme.context'
 
 const useStyles = makeStyles(() => ({
   root: {
-    padding: 16,
+    paddingTop: 16,
+    paddingBottom: 16,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between'
+  },
+  logo: {
+    width: 120,
+    '& img': {
+      maxWidth: '100%'
+    }
   }
 }))
 
@@ -19,9 +26,10 @@ export const AppBar = () => {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h4">
-        <strong> MY PROFILE</strong>
-      </Typography>
+      <Box className={classes.logo}>
+        <img src="/images/profiles-labs-logo.png" alt="Profiles labs logo" />
+      </Box>
+
       <DarkModeToggle
         onChange={() => actions.setIsDarkMode(!isDarkMode)}
         checked={isDarkMode}
